@@ -1,13 +1,26 @@
 import React from "react";
 import { Form } from "semantic-ui-react";
 
-function PokemonForm() {
+function PokemonForm({ onSubmitForm }) {
+  function handleSubmit(e) {
+    const pokemonData = {
+      name: e.target.name.value,
+      hp: e.target.hp.value,
+      sprites: {
+        front: e.target.frontUrl.value,
+        back: e.target.backUrl.value,
+      },
+    };
+    onSubmitForm(pokemonData);
+  }
+
+
   return (
     <div>
       <h3>Add a Pokemon!</h3>
       <Form
-        onSubmit={() => {
-          console.log("submitting form...");
+        onSubmit={(e) => {
+          handleSubmit(e)
         }}
       >
         <Form.Group widths="equal">
